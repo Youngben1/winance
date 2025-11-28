@@ -1,0 +1,63 @@
+'use client'
+
+import FooterLink from '@/components/forms/FooterLink'
+import InputField from '@/components/forms/InputField'
+import { Button } from '@/components/ui/button'
+import { useForm } from 'react-hook-form';
+
+const SignIn = () => {
+   const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<SignInFormData>({
+        defaultValues: {
+            email: '',
+            password: '',
+        },
+        mode: 'onBlur',
+    });
+
+    const onSubmit = async (SignInFormData) => {
+      try{
+        console.log('Sign in')
+      } catch (error){
+        console.log(error);
+      }
+    }
+
+  return (
+    <>
+            <h1 className="form-title mt-5">Welcome back</h1>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <InputField
+                    name="email"
+                    label="Email"
+                    placeholder="Enter a strong Email"
+                    register={register}
+                    error={errors.email}
+                    validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/ }}
+                />
+
+                <InputField
+                    name="password"
+                    label="Password"
+                    placeholder="Enter a strong password"
+                    type="password"
+                    register={register}
+                    error={errors.password}
+                    validation={{ required: 'Password is required', minLength: 8 }}
+                />
+
+                <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-5">
+                    {isSubmitting ? 'Signing In' : 'Sign In'}
+                </Button>
+
+                <FooterLink text="Don't have an account?" linkText="Create an account" href="/sign-up" />
+            </form>
+        </>
+  )
+}
+
+export default SignIn
