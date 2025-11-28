@@ -35,6 +35,7 @@ const SignIn = () => {
                     name="email"
                     label="Email"
                     placeholder="Enter a strong Email"
+                    type='email'
                     register={register}
                     error={errors.email}
                     validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/ }}
